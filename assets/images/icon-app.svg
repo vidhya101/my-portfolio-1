@@ -1,0 +1,24 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cloud Shape with Gradient -->
+  <path d="M30.6667 22.6667C30.6667 17.4973 26.1694 13 21 13C18.4623 13 16.2776 14.1789 15.3946 16.5192C13.732 15.8093 11.5865 15.6667 9.66667 17.2418C6.80005 19.0366 6.29157 23.8157 6.29157 23.8157C5.78986 24.9477 6.37554 26.1374 7.58381 26.6715C8.79057 27.2074 10.2106 26.8442 11.0845 25.8123C11.699 26.2394 12.2484 26.6168 12.8348 26.8322C13.9381 27.2456 15.1634 27.4741 16.4157 27.4741C21.103 27.4741 24.9478 23.4861 25.9126 18.1173C29.4724 17.9304 30.6667 20.1645 30.6667 22.6667Z" fill="url(#cloudGradient)"/>
+  
+  <!-- Gear Shape for Automation -->
+  <circle cx="20" cy="20" r="14" fill="url(#gearGradient)" stroke="#333" stroke-width="2"/>
+  <path d="M20 8L18 12L22 12L20 8Z" fill="#333"/>
+  <path d="M20 32L18 28L22 28L20 32Z" fill="#333"/>
+  <path d="M8 20L12 18L12 22L8 20Z" fill="#333"/>
+  <path d="M32 20L28 18L28 22L32 20Z" fill="#333"/>
+  
+  <!-- Definitions for Gradients -->
+  <defs>
+    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A3C4F5"/>
+      <stop offset="100%" stop-color="#5A8DEE"/>
+    </linearGradient>
+    
+    <linearGradient id="gearGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFDB6E"/>
+      <stop offset="100%" stop-color="#FFBC5E"/>
+    </linearGradient>
+  </defs>
+</svg>
