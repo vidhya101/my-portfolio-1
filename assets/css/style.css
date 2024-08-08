@@ -205,6 +205,19 @@ article {
   border-radius: inherit;
   z-index: -1;
 }
+.more-link {
+  font-size: 0.8em;
+  color: #007bff;
+  text-decoration: none;
+  font-style: italic;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.more-link:hover {
+  color: #0056b3; /* Darker blue for hover effect */
+  text-decoration: underline; /* Underline effect on hover */
+}
+
 
 .icon-box ion-icon { --ionicon-stroke-width: 35px; }
 
@@ -500,6 +513,15 @@ main {
 \*-----------------------------------*/
 
 .about .article-title { margin-bottom: 15px; }
+
+.article-title a {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits color from the parent element */
+}
+
+.article-title a:hover {
+  color: red; /* Change color on hover */
+}
 
 .about-text {
   color: var(--light-gray);
