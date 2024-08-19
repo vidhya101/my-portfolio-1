@@ -9,7 +9,7 @@ const toggleClass = (elem, className) => elem.classList.toggle(className);
 // Sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-sidebarBtn.addEventListener("click", () => toggleClass(sidebar, "active"));
+sidebarBtn.addEventListener("click", () => sidebar.classList.toggle("active"));
 
 // Modal variables
 const modalContainer = document.querySelector("[data-modal-container]");
@@ -19,16 +19,16 @@ const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-// Function to open the modal
+// Open modal function
 const openModal = (imgSrc, imgAlt, title, text) => {
-  console.log('Opening modal with:', imgSrc, imgAlt, title, text); // Debugging line
   modalImg.src = imgSrc;
   modalImg.alt = imgAlt;
-  modalTitle.innerHTML = title;
-  modalText.innerHTML = text;
-  modalContainer.classList.add('active'); // Show modal
-  overlay.classList.add('active'); // Show overlay
+  modalTitle.textContent = title;
+  modalText.textContent = text;
+  modalContainer.classList.add('active');
+  overlay.classList.add('active');
 };
+
 
 // Function to close the modal
 const closeModal = () => {
@@ -36,18 +36,30 @@ const closeModal = () => {
   overlay.classList.remove('active'); // Hide overlay
 };
 
-// Add click event to project items
-document.querySelectorAll("[data-modal-trigger]").forEach(item => {
-  item.addEventListener("click", () => {
-    console.log('Clicked modal trigger'); // Debugging line
-    const img = item.closest('figure').querySelector('img');
-    openModal(
-      img.src,
-      img.alt,
-      item.closest('li').querySelector(".project-title").innerHTML,
-      item.closest('li').querySelector(".project-category").innerHTML
-    );
+// Event listeners for opening and closing the modal
+document.querySelectorAll('.modal-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function() {
+    const modalId = this.getAttribute('data-modal');
+    const modal = document.getElementById(modalId);
+    const img = this.closest('figure').querySelector('img.expandable-image');
+    const modalImg = modal.querySelector('.modal-content');
+
+    modal.style.display = "block";
+    modalImg.src = img.src;
   });
+});
+
+document.querySelectorAll('.modal-close').forEach(closeBtn => {
+  closeBtn.addEventListener('click', function() {
+    const modal = this.closest('.modal');
+    modal.style.display = "none";
+  });
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = "none";
+  }
 });
 
 // Add click event to modal close button and overlay
@@ -150,3 +162,21 @@ testimonialsItems.forEach(item => {
     text.classList.toggle('expanded');
   });
 });
+
+
+// Attach event listeners to project images
+const projectImages = document.querySelectorAll('.project-image');
+projectImages.forEach(image => {
+  image.addEventListener('click', () => {
+    const imgSrc = image.src;
+    const imgAlt = image.alt;
+    const title = image.closest('.project-item').querySelector('.project-title').textContent;
+    const text = image.closest('.project-item').querySelector('.project-category').textContent;
+    openModal(imgSrc, imgAlt, title, text);
+  });
+});
+
+
+// Ensure the modal closes when the close button or overlay is clicked
+modalCloseBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
