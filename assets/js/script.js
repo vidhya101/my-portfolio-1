@@ -180,3 +180,69 @@ projectImages.forEach(image => {
 // Ensure the modal closes when the close button or overlay is clicked
 modalCloseBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+
+// Skill bar animation on scroll
+const animateSkillBars = () => {
+  const skillBars = document.querySelectorAll('.skill-bar');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const skillBar = entry.target;
+        const width = skillBar.getAttribute('data-width');
+        skillBar.style.setProperty('--skill-width', width + '%');
+        skillBar.classList.add('animate');
+        observer.unobserve(skillBar);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  skillBars.forEach(bar => observer.observe(bar));
+};
+
+// Initialize skill bar animation when DOM is loaded
+document.addEventListener('DOMContentLoaded', animateSkillBars);
+
+// Achievement counter animation
+const animateCounters = () => {
+  const counters = document.querySelectorAll('.achievement-number');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        const target = counter.textContent;
+        const isPercentage = target.includes('%');
+        const isDollar = target.includes('$');
+        const isTimes = target.includes('×');
+        const isPlus = target.includes('+');
+        
+        let numericValue = parseFloat(target.replace(/[^0-9.]/g, ''));
+        let suffix = '';
+        
+        if (isPercentage) suffix = '%';
+        if (isDollar) suffix = '$';
+        if (isTimes) suffix = '×';
+        if (isPlus) suffix = '+';
+        
+        let current = 0;
+        const increment = numericValue / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= numericValue) {
+            current = numericValue;
+            clearInterval(timer);
+          }
+          counter.textContent = Math.floor(current) + suffix;
+        }, 20);
+        
+        observer.unobserve(counter);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => observer.observe(counter));
+};
+
+// Initialize counter animation when DOM is loaded
+document.addEventListener('DOMContentLoaded', animateCounters);
